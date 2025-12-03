@@ -1,0 +1,79 @@
+package main
+
+import "fmt"
+
+/*
+面向对象
+1. 题目 ：定义一个 Shape 接口，包含 Area() 和 Perimeter() 两个方法。然后创建 Rectangle 和 Circle 结构体，实现 Shape 接口。在主函数中，创建这两个结构体的实例，并调用它们的 Area() 和 Perimeter() 方法。
+- 考察点 ：接口的定义与实现、面向对象编程风格。
+*/
+type Shaper interface {
+	Area()
+	Perimeter()
+}
+type Rectangle struct {
+	area      int
+	perimeter int
+}
+
+func (r *Rectangle) Area() {
+	fmt.Println("Rectangle.area: ", r.area)
+}
+
+func (r *Rectangle) Perimeter() {
+	fmt.Println("Rectangle.perimeter: ", r.perimeter)
+}
+
+type Circle struct {
+	area      int
+	perimeter int
+}
+
+func (c *Circle) Area() {
+	fmt.Println("Circle.area: ", c.area)
+}
+
+func (c *Circle) Perimeter() {
+	fmt.Println("Circle.perimeter: ", c.perimeter)
+}
+
+func ex3_test1() {
+	rec := Rectangle{11, 21}
+	rec.Area()
+	rec.Perimeter()
+	fmt.Println("=====================")
+	c := Circle{31, 23}
+	c.Area()
+	c.Perimeter()
+}
+
+/*
+面向对象
+2. 题目 ：使用组合的方式创建一个 Person 结构体，包含 Name 和 Age 字段，再创建一个 Employee 结构体，组合 Person 结构体并添加 EmployeeID 字段。为 Employee 结构体实现一个 PrintInfo() 方法，输出员工的信息。
+- 考察点 ：组合的使用、方法接收者。
+*/
+type Person struct {
+	name string
+	age  int
+}
+type Employee struct {
+	EmployeeID int64
+	Person
+}
+
+func (e *Employee) printInfo() {
+	fmt.Println("EmployeeID:", e.EmployeeID)
+	fmt.Println("EmployeeName:", e.name)
+	fmt.Println("EmployeeAge:", e.age)
+}
+
+func ex3_test2() {
+	e := Employee{EmployeeID: 1, Person: Person{name: "Jack", age: 18}}
+	e.printInfo()
+}
+
+//
+//func main() {
+//	ex3_test1()
+//	ex3_test2()
+//}
